@@ -1,4 +1,5 @@
 import { Link, routes } from '@redwoodjs/router'
+import CommentsCell from 'src/components/CommentsCell'
 
 const Article = ({ article }) => {
   return (
@@ -9,6 +10,7 @@ const Article = ({ article }) => {
         </h2>
       </header>
       <div className="mt-2 text-gray-900 font-light">{article.body}</div>
+      {<CommentsCell />}
     </article>
   )
 }
