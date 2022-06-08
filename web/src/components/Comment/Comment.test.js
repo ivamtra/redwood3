@@ -14,5 +14,23 @@ const COMMENT = {
 describe('Comment', () => {
   it('renders successfully', () => {
     render(<Comment comment={COMMENT} />)
+
+    expect(screen.getByText(COMMENT.name)).toBeInTheDocument()
+    expect(screen.getByText(COMMENT.body)).toBeInTheDocument()
+  })
+
+  it('does not render a delete button if user is logged out', async () => {
+    render(<Comment comment={COMMENT} />)
+
+    await waitFor(() =>
+      expect(screen.queryByText('Delete')).not.toBeInTheDocument()
+    )
+  })
+
+  it('renders a delete button if the user is a moderator', async () => {
+    mockCurrentUser({ roles: 'moderator' })
+    render(<Comment comment={COMMENT} />)
+
+    await waitFor(() => expect(screen.getByText('Delete')).toBeInTheDocument())
   })
 })
