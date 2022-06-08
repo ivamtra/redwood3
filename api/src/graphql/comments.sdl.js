@@ -26,6 +26,6 @@ export const schema = gql`
   }
 
   type Query {
-    comments: [Comment!]! @skipAuth
+    comments(postId: Int!): [Comment!]! @skipAuth
   }
 `
